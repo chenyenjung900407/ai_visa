@@ -1,95 +1,84 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState } from "react";
+import { Box, Flex, Spacer, Button, HStack, VStack, Container, Center } from "@chakra-ui/react";
+import Logo from "@/app/_assets/logo.svg";
+import AlertBlack from"@/app/_assets/alert-black.svg";
+import AlertWhite from"@/app/_assets/alert-white.svg";
+import MessageIcon from "@/app/_assets/message.svg";
+import EditIcon from "@/app/_assets/edit.svg";
+import LogoutIcon from "@/app/_assets/logout.svg";
+
 
 export default function Home() {
+  const [isReportHover, setIsReportHover] = useState(false);
+
+  function handleReportMouseover() {
+    setIsReportHover(true);
+  };
+  function handleReportMouseout() {
+    setIsReportHover(false);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Flex alignItems="center" width="100%" height="77px" px="32px" bg="primaryPrimary">
+        <HStack spacing={0}>
+          <Box>
+            <Logo />
+          </Box>
+          <VStack spacing={0} color="white">
+            <Container fontSize={20} fontWeight={700} lineHeight="24px">
+              <h1>麥脆雞皮</h1>
+            </Container>
+            <Container fontSize={14} fontWeight={300}>
+              <h2>CCS GPT</h2>
+            </Container>
+          </VStack>
+        </HStack>
+        <Spacer />
+        <Button
+          px="24px"
+          bg="white"
+          color="gray.800"
+          _hover={{ bg:'gray.600', color: 'white' }}
+          onMouseOver={handleReportMouseover}
+          onMouseOut={handleReportMouseout}
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <HStack spacing="8px">
+            {isReportHover ? <AlertWhite /> : <AlertBlack />}
+            <Box fontSize={16}>
+              問題回報
+            </Box>
+          </HStack>
+        </Button>
+      </Flex>
+      <Flex width="100%">
+        <Box p="12px" bg="#F9F9F9">
+          <VStack width="60px" height="799px" py="32px" px="12px" bg="primaryPrimary" borderRadius={16}>
+            <Flex direction="column" flex="1" gap="16px" >
+              <Center width="36px" height="36px">
+                <Button p="8px" bg="#9FB4FF" borderRadius="20px">
+                  <MessageIcon />
+                </Button>
+              </Center>
+              <Center width="36px" height="36px">
+                <Button p="8px" bg="none" borderRadius="20px">
+                  <EditIcon />
+                </Button>
+              </Center>
+              <Spacer />
+            </Flex>
+            <Center width="36px" height="36px">
+              <Button p="8px" bg="none" borderRadius="20px">
+                <LogoutIcon />
+              </Button>
+            </Center>
+          </VStack>
+        </Box>
+        <Box>2</Box>
+        <Box>3</Box>
+      </Flex>
+    </>
   );
 }
